@@ -16,12 +16,20 @@ class Deck:
         random.shuffle(self.cards)
 
     def deal(self):
-        """Pops a card from the deck and returns it"""
-        pass
+        """Pops a card from the deck and returns it.
+
+        Returns the last card in the deck if the deck is not empty and None if empty
+        """
+        if self.cards:
+            return self.cards.pop()
+        return None
 
     def reset(self):
-        """Completely resets the deck back to the 52-card standard deck"""
-        pass
+        """Completely resets the deck back to the 52-card standard deck.
+        
+        This works on the Deck object itself. It returns nothing.
+        """
+        self.cards = [Card(rank, suit) for suit in self.SUITS for rank in self.RANKS]
 
     def __len__(self):
         """Returns the number of cards left in the deck"""
