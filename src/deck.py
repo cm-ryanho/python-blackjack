@@ -9,7 +9,7 @@ class Deck:
 
     def __init__(self):
         """Initializes a standard 52-card deck"""
-        self.cards = [Card(rank, suit) for suit in self.SUITS for rank in self.RANKS]
+        self.reset()
 
     def shuffle(self):
         """Shuffles the list of cards in the deck"""
