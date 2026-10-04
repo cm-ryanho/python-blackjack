@@ -19,8 +19,6 @@ class Hand:
             aces -= 1
         
         return value
-        
-
 
     def add_card(self, card):
         """Adds 1 card to the hand."""
@@ -30,10 +28,28 @@ class Hand:
         return self.value > 21
 
     def is_blackjack(self):
-        return (len(self.cards) == 2 and self.value == 21):
+        return (len(self.cards) == 2 and self.value == 21)
             
-    def __str__(self):
-        pass
+    def render(self):
+        """Prints the cards in the hand side by side."""
+        columns = []
+        for card in self.cards:
+            suit = card.SUIT_MAP[card.suit]
+            columns.append([
+                "┌───────┐",
+                f"│{card.rank:<7}│",
+                "│       │",
+                f"│{suit:^7}│",
+                "│       │",
+                f"│{card.rank:>7}│",
+                "└───────┘",
+            ])
+
+        for row in zip(*columns):
+            print("  ".join(row))
+
+    def __len__(self):
+        return len(self.cards)
 
         
         
