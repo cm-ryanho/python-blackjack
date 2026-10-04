@@ -15,7 +15,7 @@ class Card:
         >>> card.value
         10
     """
-
+    SUIT_MAP = {"Hearts": "♥", "Spades": "♠", "Clubs": "♣", "Diamonds": "♦"}
     SUITS = ["Spades", "Hearts", "Diamonds", "Clubs"]
     RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 
@@ -39,7 +39,8 @@ class Card:
     
     def __str__(self):
         """Returns Card's rank and suit, example: K♠ """
-        pass
+
+        return f"{self._rank}{self.SUIT_MAP[self._suit]}"
 
     @property
     def rank(self) -> str:
@@ -59,10 +60,15 @@ class Card:
         "2-10" return "face value".
 
         """
-        pass
+        if self._rank in ["J", "Q", "K"]:
+            return 10
+        
+        if self._rank == "A":
+            return 11
+        
+        else:
+            return int(self._rank)
 
-
-            
 
 
 
