@@ -29,7 +29,14 @@ class Card:
         Raises:
             ValueError: If `rank` or `suit` is not valid.
         """
-        pass
+        self._rank = rank
+        self._suit = suit
+
+        if self._rank not in Card.RANKS:
+            raise ValueError("Invalid Rank")
+        if self._suit not in Card.SUITS:
+            raise ValueError("Invalid Suit")
+    
     def __str__(self):
         """Returns Card's rank and suit, example: K♠ """
         pass
@@ -37,11 +44,13 @@ class Card:
     @property
     def rank(self) -> str:
         """Returns card's rank."""
-        
+        return self._rank
+    
     @property
     def suit(self) -> str:
         """Returns card's suit."""
-
+        return self._suit
+    
     @property
     def value(self) -> int:
         """Returns value of card.
@@ -50,6 +59,7 @@ class Card:
         "2-10" return "face value".
 
         """
+        pass
 
 
             
