@@ -52,8 +52,7 @@ class Deck:
             else:
                 clubs.append(card.rank)
 
-        return f"""
-♠: {" ".join(spades)}
+        return f"""♠: {" ".join(spades)}
 ♥: {" ".join(hearts)}
 ♦: {" ".join(diamonds)}
 ♣: {" ".join(clubs)}"""
