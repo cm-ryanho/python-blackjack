@@ -1,9 +1,10 @@
 from src.hand import Hand
 
 class Player:
-    def __init__(self, balance=100):
+    def __init__(self, name, balance=100):
         self.balance = balance
         self.hand = Hand()
+        self.name = name
 
     @staticmethod    
     def choose_action():
@@ -11,6 +12,10 @@ class Player:
             action = input("Choose your action ['hit'/'stand']: ").strip().lower()
             if action == "hit" or action == "stand":
                 return action
+
+    @property
+    def name(self):
+        return self.name
             
     def get_bet(self):
         while True:
@@ -30,7 +35,7 @@ class Player:
 
 class Dealer(Player):
     def __init__(self):
-        super().__init__(balance=0)
+        super().__init__(name = "Dealer", balance=0)
 
     def choose_action(self):
         if self.hand.value < 17:
