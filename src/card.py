@@ -20,15 +20,39 @@ class Card:
     RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 
     def __init__(self, rank: str, suit: str):
-        """Create a card
+        """Creates a card
 
-            Args:
-                rank: Card's rank, must be in 'Card.RANKS'.
-                suit: Card's suit, must be in 'Card.SUITS'.
+        Args:
+            rank: Card's rank, must be in 'Card.RANKS'.
+            suit: Card's suit, must be in 'Card.SUITS'.
 
-            Raises:
-                ValueError: If `rank` or `suit` is not valid.
+        Raises:
+            ValueError: If `rank` or `suit` is not valid.
         """
+        pass
+    def __str__(self):
+        """Returns Card's rank and suit, example: K♠ """
+        pass
+
+    @property
+    def rank(self) -> str:
+        """Returns card's rank."""
+        
+    @property
+    def suit(self) -> str:
+        """Returns card's suit."""
+
+    @property
+    def value(self) -> int:
+        """Returns value of card.
+
+        "J", "Q", "K", return 10. "A" returns 11.
+        "2-10" return "face value".
+
+        """
+
+
+            
 
 
 
