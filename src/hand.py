@@ -20,6 +20,9 @@ class Hand:
         
         return value
 
+    def clear(self):
+        self.cards = []
+
     def add_card(self, card):
         """Adds 1 card to the hand."""
         self.cards.append(card)

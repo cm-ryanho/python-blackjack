@@ -4,7 +4,7 @@ class Player:
     def __init__(self, name, balance=100):
         self.balance = balance
         self.hand = Hand()
-        self.name = name
+        self._name = name
 
     @staticmethod    
     def choose_action():
@@ -15,7 +15,7 @@ class Player:
 
     @property
     def name(self):
-        return self.name
+        return self._name
             
     def get_bet(self):
         while True:
