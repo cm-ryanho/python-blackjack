@@ -10,9 +10,15 @@ class Game:
         self.dealer = Dealer()
 
     def play(self):
+        print(f"YOUR BALANCE: {self.player.balance}")
         while True:
             self.play_round()
             print(f"YOUR BALANCE: {self.player.balance}")
+
+            if self.player.balance == 0:
+                print("GAMBLING IS BAD")
+                break
+
             choice = input("DO YOU WANT TO PLAY AGAIN [Y/N]: ")
             if choice == "N":
                 break
