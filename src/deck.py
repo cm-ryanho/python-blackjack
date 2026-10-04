@@ -33,8 +33,27 @@ class Deck:
 
     def __len__(self):
         """Returns the number of cards left in the deck"""
-        pass
+        return len(self.cards)
 
     def __str__(self):
-        """Prints the deck in a readable format"""
-        ...
+        """Returns the deck in a readable format whenever set to str"""
+        spades = []
+        hearts = []
+        clubs = []
+        diamonds = []
+        for card in self.cards:
+            if card.suit == "Spades":
+                spades.append(card.rank)
+            elif card.suit == "Hearts":
+                hearts.append(card.rank)
+            elif card.suit == "Diamonds":
+                diamonds.append(card.rank)
+            else:
+                clubs.append(card.rank)
+
+        return f"""
+        ♠: {" ".join(spades)}
+        ♥: {" ".join(hearts)}
+        ♦: {" ".join(diamonds)}
+        ♣: {" ".join(clubs)}
+        """
