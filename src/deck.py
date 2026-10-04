@@ -24,4 +24,4 @@ class Deck:
 
     def __str__(self):
         """Prints the deck in a readable format"""
-        pass
+        ...
