@@ -1,7 +1,6 @@
 from src.deck import Deck
 from src.player import Player, Dealer
 import time
-import sys
 
 class Game:
     def __init__(self):
