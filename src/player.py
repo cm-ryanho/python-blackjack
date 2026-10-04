@@ -35,7 +35,7 @@ class Player:
 
 class Dealer(Player):
     def __init__(self):
-        super().__init__(balance=0)
+        super().__init__(name = "Dealer", balance=0)
 
     def choose_action(self):
         if self.hand.value < 17:
