@@ -1,5 +1,5 @@
 class Card:
-"""A single playing card from a standard 52-card deck.
+    """A single playing card from a standard 52-card deck.
 
     A card is immutable after creation: rank and suit are read-only.
     Blackjack value is exposed via the `value` property.
@@ -9,7 +9,7 @@ class Card:
         suit (str): The card's suit, one of "Spades", "Hearts", "Diamonds", "Clubs".
 
     Example:
-        >>> card = Card("K", "♥")
+        >>> card = Card("K", "Hearts")
         >>> print(card)
         K♥
         >>> card.value
