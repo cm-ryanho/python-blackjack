@@ -1,4 +1,5 @@
 from src.card import Card
+import random
 
 class Deck:
     """Represents a standard 52-card playing deck. Contains objects from the Card class"""
@@ -12,7 +13,7 @@ class Deck:
 
     def shuffle(self):
         """Shuffles the list of cards in the deck"""
-        pass
+        random.shuffle(self.cards)
 
     def deal(self):
         """Pops a card from the deck and returns it"""
