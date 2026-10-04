@@ -25,11 +25,12 @@ class Deck:
         return None
 
     def reset(self):
-        """Completely resets the deck back to the 52-card standard deck.
+        """Completely resets the deck back to the 52-card standard deck and shuffles it.
         
         This works on the Deck object itself. It returns nothing.
         """
         self.cards = [Card(rank, suit) for suit in self.SUITS for rank in self.RANKS]
+        self.shuffle()
 
     def __len__(self):
         """Returns the number of cards left in the deck"""
@@ -52,8 +53,7 @@ class Deck:
                 clubs.append(card.rank)
 
         return f"""
-        ♠: {" ".join(spades)}
-        ♥: {" ".join(hearts)}
-        ♦: {" ".join(diamonds)}
-        ♣: {" ".join(clubs)}
-        """
+♠: {" ".join(spades)}
+♥: {" ".join(hearts)}
+♦: {" ".join(diamonds)}
+♣: {" ".join(clubs)}"""
