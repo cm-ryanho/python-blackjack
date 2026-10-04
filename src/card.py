@@ -19,7 +19,16 @@ class Card:
     SUITS = ["Spades", "Hearts", "Diamonds", "Clubs"]
     RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 
+    def __init__(self, rank: str, suit: str):
+        """Create a card
 
+            Args:
+                rank: Card's rank, must be in 'Card.RANKS'.
+                suit: Card's suit, must be in 'Card.SUITS'.
+
+            Raises:
+                ValueError: If `rank` or `suit` is not valid.
+        """
 
 
 
