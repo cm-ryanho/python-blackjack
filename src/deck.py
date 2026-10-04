@@ -18,6 +18,10 @@ class Deck:
         """Pops a card from the deck and returns it"""
         pass
 
+    def reset(self):
+        """Completely resets the deck back to the 52-card standard deck"""
+        pass
+
     def __len__(self):
         """Returns the number of cards left in the deck"""
         pass
