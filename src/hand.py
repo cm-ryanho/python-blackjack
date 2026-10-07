@@ -22,7 +22,7 @@ class Hand:
         return (len(self) == 2 and self.value == 21)
 
     def is_bust(self) -> bool:
-        pass
+        return self.value > 21
 
     def add_card(self) -> None:
         pass
