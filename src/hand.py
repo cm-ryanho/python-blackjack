@@ -4,7 +4,19 @@ class Hand:
 
     @property
     def value(self):
-        pass
+        total = 0
+        aces = 0
+        for card in self._cards:
+            if card.rank == "A":
+                aces += 1
+                total += 11
+            else:
+                total += card.value
+
+        while total > 21 and aces > 0:
+            aces -= 1
+            total -= 10
+        return total
 
     def is_blackjack(self) -> bool:
         pass
