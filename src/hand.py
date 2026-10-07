@@ -29,3 +29,9 @@ class Hand:
 
     def reset(self) -> None:
         pass
+
+    def __len__(self):
+        return len(self._cards)
+
+    def __str__(self):
+        pass
