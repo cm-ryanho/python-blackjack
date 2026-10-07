@@ -40,13 +40,3 @@ class Hand:
         for card in self._cards:
             cards.append(str(card))
         return str(cards)
-
-hand = Hand()
-
-hand.add_card(BlackjackCard("A", "Hearts"))
-
-print(hand)
-
-hand.reset
-
-print(hand)
