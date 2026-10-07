@@ -1,77 +1,42 @@
+from src.card import BlackjackCard
+
 class Hand:
-    """Represents a hand in Blackjack."""
     def __init__(self):
-        """Initializes a card list."""
-        self.cards = []
-        
+        self._cards = []
+
     @property
     def value(self):
-        """Calculates the value of a hand and returns it."""
-        value = 0
+        total = 0
         aces = 0
-        for card in self.cards:
+        for card in self._cards:
             if card.rank == "A":
                 aces += 1
-            value += card.value
+                total += 11
+            else:
+                total += card.value
 
-        while (value > 21 and aces > 0):
-            value -= 10
+        while total > 21 and aces > 0:
             aces -= 1
-        
-        return value
+            total -= 10
+        return total
 
-    def clear(self):
-        self.cards = []
+    def is_blackjack(self) -> bool:
+        return (len(self) == 2 and self.value == 21)
 
-    def add_card(self, card):
-        """Adds 1 card to the hand."""
-        self.cards.append(card)
-
-    def is_bust(self):
+    def is_bust(self) -> bool:
         return self.value > 21
 
-    def is_blackjack(self):
-        return (len(self.cards) == 2 and self.value == 21)
-            
-    def render(self):
-        """Prints the cards in the hand side by side."""
-        columns = []
-        for card in self.cards:
-            suit = card.SUIT_MAP[card.suit]
-            columns.append([
-                "┌───────┐",
-                f"│{card.rank:<7}│",
-                "│       │",
-                f"│{suit:^7}│",
-                "│       │",
-                f"│{card.rank:>7}│",
-                "└───────┘",
-            ])
+    def add_card(self, card: BlackjackCard) -> None:
+        self._cards.append(card)
 
-        for row in zip(*columns):
-            print("  ".join(row))
+    def reset(self) -> None:
+        self._cards = []
 
     def __len__(self):
-        return len(self.cards)
+        return len(self._cards)
 
-        
-        
-
-        
-
-
-        
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
+    def __str__(self):
+        cards = []
+        for card in self._cards:
+            cards.append(str(card))
+        return str(cards)
