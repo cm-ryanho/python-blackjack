@@ -1,9 +1,13 @@
+from typing import Literal
+
 SUIT_MAP = {"Hearts": "♥", "Spades": "♠", "Clubs": "♣", "Diamonds": "♦"}
 SUITS = ["Spades", "Hearts", "Diamonds", "Clubs"]
+SuitType = Literal["Spades", "Hearts", "Diamonds", "Clubs"]
 RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+RankType = Literal["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 
 class BlackjackCard:
-    def __init__(self, rank:str, suit:str):
+    def __init__(self, rank: RankType, suit:SuitType):
         if rank not in RANKS:
             raise ValueError(f"The rank {rank} is invalid.")
         elif suit not in SUITS:
