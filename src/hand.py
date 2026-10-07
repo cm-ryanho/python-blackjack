@@ -1,3 +1,5 @@
+from src.card import BlackjackCard
+
 class Hand:
     def __init__(self):
         self._cards = []
@@ -24,11 +26,11 @@ class Hand:
     def is_bust(self) -> bool:
         return self.value > 21
 
-    def add_card(self) -> None:
-        pass
+    def add_card(self, card: BlackjackCard) -> None:
+        self._cards.append(card)
 
     def reset(self) -> None:
-        pass
+        self._cards = []
 
     def __len__(self):
         return len(self._cards)
