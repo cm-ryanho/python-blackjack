@@ -2,7 +2,7 @@ SUIT_MAP = {"Hearts": "♥", "Spades": "♠", "Clubs": "♣", "Diamonds": "♦"}
 SUITS = ["Spades", "Hearts", "Diamonds", "Clubs"]
 RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 
-class Card:
+class BlackjackCard:
     def __init__(self, rank:str, suit:str):
         if rank not in RANKS:
             raise ValueError(f"The rank {rank} is invalid.")
@@ -12,10 +12,13 @@ class Card:
         self._rank = rank
         self._suit = suit
 
+    def __str__(self):
+        return f"{self._rank}{SUIT_MAP[self._suit]}"
+
     @property
     def value(self) -> int:
         if self.rank in ["2", "3", "4", "5", "6", "7", "8", "9", "10"]:
-            return int(self.rank)
+            return int(self._rank)
         elif self.rank in ["J", "Q", "K"]:
             return 10
         else:
