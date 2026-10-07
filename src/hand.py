@@ -36,4 +36,7 @@ class Hand:
         return len(self._cards)
 
     def __str__(self):
-        pass
+        cards = []
+        for card in cards:
+            cards.append(str(card))
+        return str(cards)
