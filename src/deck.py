@@ -4,7 +4,7 @@ import random
 class Deck:
     def __init__(self):
         self._cards = self.create_standard()
-        self._cards.shuffle()
+        self.shuffle()
 
     def create_standard(self) -> list[BlackjackCard]:
         cards = []
@@ -14,7 +14,7 @@ class Deck:
         return cards
 
     def shuffle(self) -> None:
-        self._cards.random.shuffle()
+        random.shuffle(self._cards)
 
     def deal(self):
         if len(self) == 0:
@@ -25,4 +25,10 @@ class Deck:
         return len(self._cards)
 
     def __str__(self):
-        pass
+        cards = []
+        for card in self._cards:
+            cards.append(str(card))
+        return f"{cards}"
+
+d = Deck()
+print(d)
