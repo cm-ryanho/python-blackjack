@@ -17,7 +17,12 @@ class Deck:
         self._cards.random.shuffle()
 
     def deal(self):
-        pass
+        if len(self) == 0:
+            raise ValueError("There are no cards to deal.")
+        return self._cards.pop()
+
+    def __len__(self):
+        return len(self._cards)
 
     def __str__(self):
         pass
