@@ -29,6 +29,3 @@ class Deck:
         for card in self._cards:
             cards.append(str(card))
         return f"{cards}"
-
-d = Deck()
-print(d)
