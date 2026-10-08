@@ -1,10 +1,29 @@
 from src.card import BlackjackCard
 from src.hand import Hand
 
-
-class Player:
+class Participant:
     def __init__(self, hand: Hand):
         self._hand = hand
+
+    @property
+    def hand_value(self) -> int:
+        return self._hand.value
+
+    def clear_hand(self) -> None:
+        self._hand.reset()
+
+    def add_card(self, card: BlackjackCard) -> None:
+        self._hand.add_card(card)
+
+    def is_blackjack(self) -> bool:
+        return self._hand.is_blackjack()
+    
+    def is_bust(self) -> bool:
+        return self._hand.is_bust()
+
+class Player(Participant):
+    def __init__(self, hand: Hand):
+        super().__init__(hand)
         self._balance = 0
         self._bet = 0
 
@@ -44,23 +63,17 @@ class Player:
         self._balance += self._bet
         self._clear_bet()
 
-    def is_bust(self) -> bool:
-        return self._hand.is_bust()
-
-    def is_blackjack(self) -> bool:
-        return self._hand.is_blackjack()
-
-    def add_card(self, card: BlackjackCard) -> None:
-        self._hand.add_card(card)
-
-    def clear_hand(self) -> None:
-        self._hand.reset()
-
     @property
     def bet(self) -> int:
         return self._bet
 
-    @property
-    def hand_value(self) -> int:
-        return self._hand.value
+class Dealer(Participant):
+    STAND_VALUE = 17
+
+    def should_stand(self) -> bool:
+        if self.hand_value >= self.STAND_VALUE:
+            return True
+        else:
+            return False
+
         
