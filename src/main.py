@@ -9,15 +9,61 @@ ActionType = Literal["hit", "stand"]
 
 def main():
     game = initialize_game()
+    game.player_deposit(100)
 
-    game.deal_cards()
 
-    display_cards(game)
+    while True:
+        balance = game.get_player_balance()
+        if balance <= 0:
+            print("You are not that rich buddy")
+            break
+        
 
-    player_action_loop(game)
+        game.reset_round()
+        player_bet = get_bet(balance)
+        
+        game.place_bet(player_bet)
 
+
+
+        game.deal_cards()
+
+        display_cards(game)
+
+        # game loop
+        # player loop
+        if game.player_is_blackjack():
+            game.resolve_round()
+            print("BLACKJACK")
+            continue
+        else:
+            player_action_loop(game)
+
+            if not game.player.is_bust():
+        # dealer action loop
+                dealer_action_loop(game)
+                game.resolve_round()
+
+        # continue playing?
+        play_again = input("do you want to play another round? [y/n]: ").strip().lower()
+        if not play_again == "y":
+            print(f"Thanks for playing, your remaining balance: {self.player.balance}")
+            break
     
-    
+def get_bet(balance: int) -> int:
+    while True:
+        try:
+            print(f"Balance is {balance}")
+            bet = int(input(f"What is your bet: "))
+            if bet > balance:
+                print("Your not that rich buddy.")
+                continue
+            if bet <= 0:
+                print("No")
+                continue
+            return bet
+        except ValueError:
+            continue
 
 
 def player_action_loop(game: BlackjackGame):
@@ -34,16 +80,16 @@ def player_action_loop(game: BlackjackGame):
                 game.resolve_round()
                 print("BUST")
                 return
-            
-            elif game.player_is_blackjack():
-                game.resolve_round()
-                print("BLACKJACK")
-                return
-
+        
             elif game.player_is_finished(player_action):
                 return
-
-        
+def dealer_action_loop(game: BlackjackGame):
+    print("Dealers turn")
+    while game.get_dealer_action() == "hit":
+        print("Dealer gets ")
+        game.dealer_hit()
+        display_cards(game)
+    
 
 def get_player_action() -> ActionType:
     while True:
