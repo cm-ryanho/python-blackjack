@@ -27,6 +27,16 @@ class BlackjackCard:
             return 10
         else:
             return 1
+    
+    def render_lines(self) -> list[str]:
+        symbol = SUIT_MAP[self._suit]
+        return [
+            "┌───────┐",
+            f"│{self._rank:<7}│",
+            f"│{symbol:^7}│",
+            f"│{self._rank:>7}│",
+            "└───────┘",
+        ]
 
     @property
     def rank(self):

@@ -5,6 +5,11 @@ class Participant:
     def __init__(self, hand: Hand):
         self._hand = hand
 
+    def render_hand(self, gap: int = 2) -> str:
+        card_lines = [card.render_lines() for card in self._hand.cards]
+        rows = (" " * gap).join
+        return "\n".join(rows(parts) for parts in zip(*card_lines))
+
     @property
     def hand_value(self) -> int:
         return self._hand.value
