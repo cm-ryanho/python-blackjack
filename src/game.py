@@ -38,12 +38,21 @@ class BlackjackGame:
         card = self._deck.deal()
         self._player.add_card(card)
 
+    def player_is_blackjack(self) -> bool:
+        return self._player.is_blackjack()
+
+    def player_is_bust(self) -> bool:
+        return self._player.is_bust()
+
+
     def player_is_finished(self, action: ActionType) -> bool:
         if action == "stand":
             return True
         if self._player.is_bust():
             return True
         if self._player.is_blackjack():
+            return True
+        if self._player.hand_value == 21:
             return True
         else:
             return False
