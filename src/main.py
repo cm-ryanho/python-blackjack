@@ -8,7 +8,7 @@ def main():
 
     game.deal_cards()
 
-    
+    game.rende
 
 
 def initialize_game() -> BlackjackGame:

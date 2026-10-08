@@ -48,6 +48,12 @@ class BlackjackGame:
         else:
             return False
 
+    def render_player_hand(self):
+        return self._player.render_hand()
+
+    def render_dealer_hand(self):
+        return self._dealer.render_hand()
+
     
     def resolve_round(self) -> None:
         if self._player.is_bust():
