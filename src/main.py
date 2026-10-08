@@ -39,7 +39,7 @@ def main():
         else:
             player_action_loop(game)
 
-            if not game.player.is_bust():
+            if not game.player_is_bust():
         # dealer action loop
                 dealer_action_loop(game)
                 game.resolve_round()
