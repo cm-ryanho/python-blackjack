@@ -17,6 +17,14 @@ class Player:
         if balance < 0:
             raise ValueError("The balance must be positive")
         self._balance = balance
+        
+    def place_bet(self, bet:int):
+        if bet <= 0:
+            raise ValueError("The bet must be positive")
+        if bet > self._balance:
+            raise ValueError(f"The bet {bet} is larger than the balance {self._balance}")
+        self._balance -= bet
+        self._bet += bet
 
     def add_card(self, card: BlackjackCard) -> None:
         self._hand.add_card(card)
@@ -27,11 +35,7 @@ class Player:
     @property
     def bet(self) -> int:
         return self._bet
-        
-    @bet.setter
-    def bet(self, bet: int) -> None:
-        if bet <= 0:
-            raise ValueError(f"{bet} is invalid")
-        self._bet = bet
 
-    
+    @property
+    def hand_value(self) -> int:
+        return self._hand.value
