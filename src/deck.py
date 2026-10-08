@@ -3,8 +3,7 @@ import random
 
 class Deck:
     def __init__(self):
-        self._cards = self.create_standard()
-        self.shuffle()
+        self.reset()
 
     def create_standard(self) -> list[BlackjackCard]:
         cards = []
@@ -12,6 +11,10 @@ class Deck:
             for rank in RANKS:
                 cards.append(BlackjackCard(rank=rank, suit=suit))
         return cards
+
+    def reset(self) -> None:
+        self._cards = self.create_standard()
+        self.shuffle()
 
     def shuffle(self) -> None:
         random.shuffle(self._cards)
