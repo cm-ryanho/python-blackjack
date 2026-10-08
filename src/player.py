@@ -25,11 +25,11 @@ class Player:
         self._balance -= bet
         self._bet += bet
 
-    def __clear_bet(self) -> None:
+    def _clear_bet(self) -> None:
         self._bet = 0
         
     def lose_bet(self) -> None:
-        self.__clear_bet()
+        self._clear_bet()
 
     def collect_winnings(self) -> None:
         if self.is_bust():
@@ -38,11 +38,11 @@ class Player:
             self._balance += int(self._bet *2.5)
         else:
             self._balance += int(self._bet *2)
-        self.__clear_bet()
+        self._clear_bet()
 
     def push(self) -> None:
         self._balance += self._bet
-        self.__clear_bet()
+        self._clear_bet()
 
     def is_bust(self) -> bool:
         return self._hand.is_bust()
