@@ -15,7 +15,7 @@ def main():
     while True:
         balance = game.get_player_balance()
         if balance <= 0:
-            print("You are not that rich buddy")
+            print("You are not that rich buddy, shit the fuck down")
             break
         
 
@@ -50,9 +50,9 @@ def main():
         if new_balance > balance:
             print(f"You won {new_balance - balance} euro!")
         elif new_balance < balance:
-            print(f"You lost {balance - new_balance} euro.")
+            print(f"You just gave {balance - new_balance} to the house.")
         else:
-            print("Push, you get your bet back.")
+            print("Push, you get your bet back. Quit right fucking now!")
 
         # continue playing?
         play_again = input("do you want to play another round? [y/n]: ").strip().lower()
