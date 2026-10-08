@@ -21,9 +21,9 @@ class BlackjackCard:
 
     @property
     def value(self) -> int:
-        if self.rank in ["2", "3", "4", "5", "6", "7", "8", "9", "10"]:
+        if self._rank in ["2", "3", "4", "5", "6", "7", "8", "9", "10"]:
             return int(self._rank)
-        elif self.rank in ["J", "Q", "K"]:
+        elif self._rank in ["J", "Q", "K"]:
             return 10
         else:
             return 1

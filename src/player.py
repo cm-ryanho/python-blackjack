@@ -1,44 +1,66 @@
+from src.card import BlackjackCard
 from src.hand import Hand
 
-class Player:
-    def __init__(self, name, balance=100):
-        self.balance = balance
-        self.hand = Hand()
-        self._name = name
 
-    @staticmethod    
-    def choose_action():
-        while True:
-            action = input("Choose your action ['hit'/'stand']: ").strip().lower()
-            if action == "hit" or action == "stand":
-                return action
+class Player:
+    def __init__(self, hand: Hand):
+        self._hand = hand
+        self._balance = 0
+        self._bet = 0
 
     @property
-    def name(self):
-        return self._name
-            
-    def get_bet(self):
-        while True:
-            try:
-                bet = int(input("Choose your bet: "))
-                if bet > self.balance:
-                    print("You are not that rich buddy!")
-                    continue
-                elif bet <= 0:
-                    print("That doesn't work")
-                    continue
-                self.balance -= bet
-                return bet
-            except ValueError:
-                print("Fill in an integer!")
-            
+    def balance(self) -> int:
+        return self._balance
 
-class Dealer(Player):
-    def __init__(self):
-        super().__init__(name = "Dealer", balance=0)
+    def deposit(self, value: int) -> None:
+        if value < 0:
+            raise ValueError("You cannot deposit a negative value")
+        self._balance += value
+        
+    def place_bet(self, bet:int) -> None:
+        if bet <= 0:
+            raise ValueError("The bet must be positive")
+        if bet > self._balance:
+            raise ValueError(f"The bet {bet} is larger than the balance {self._balance}")
+        self._balance -= bet
+        self._bet += bet
 
-    def choose_action(self):
-        if self.hand.value < 17:
-            return "hit"
+    def _clear_bet(self) -> None:
+        self._bet = 0
+        
+    def lose_bet(self) -> None:
+        self._clear_bet()
+
+    def collect_winnings(self) -> None:
+        if self.is_bust():
+            raise ValueError("The hand is bust.")
+        if self.is_blackjack():
+            self._balance += int(self._bet *2.5)
         else:
-            return "stand"
+            self._balance += int(self._bet *2)
+        self._clear_bet()
+
+    def push(self) -> None:
+        self._balance += self._bet
+        self._clear_bet()
+
+    def is_bust(self) -> bool:
+        return self._hand.is_bust()
+
+    def is_blackjack(self) -> bool:
+        return self._hand.is_blackjack()
+
+    def add_card(self, card: BlackjackCard) -> None:
+        self._hand.add_card(card)
+
+    def clear_hand(self) -> None:
+        self._hand.reset()
+
+    @property
+    def bet(self) -> int:
+        return self._bet
+
+    @property
+    def hand_value(self) -> int:
+        return self._hand.value
+        
