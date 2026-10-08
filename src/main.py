@@ -78,10 +78,10 @@ def main():
 
 def play_again() -> bool:
     while True:
-        play_again = input("do you want to play another round? [y/n]: ").strip().lower()
-        if play_again == "y":
+        answer = input("do you want to play another round? [y/n]: ").strip().lower()
+        if answer == "y":
             return True
-        elif play_again == "n":
+        elif answer == "n":
             return False
                     
 def get_bet(balance: int) -> int:
