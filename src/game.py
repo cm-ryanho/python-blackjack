@@ -87,7 +87,7 @@ class BlackjackGame:
         return self._player.balance
 
     def place_bet(self, amount: int) -> None:
-    self._player.place_bet(amount)
+        self._player.place_bet(amount)
 
     def dealer_is_bust(self) -> bool:
         return self._dealer.is_bust()
