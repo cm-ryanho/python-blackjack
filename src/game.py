@@ -1,98 +1,69 @@
+from src.participant import Player, Dealer
 from src.deck import Deck
-from src.player import Player, Dealer
-import time
+from typing import Literal
 
-class Game:
-    def __init__(self):
-        self.deck = Deck()
-        self.player = Player(name = "j")
-        self.dealer = Dealer()
+ActionType = Literal["hit", "stand"]
 
-    def play(self):
-        print(f"YOUR BALANCE: {self.player.balance}")
-        while True:
-            self.play_round()
-            print(f"YOUR BALANCE: {self.player.balance}")
+class BlackjackGame:
+    def __init__(self, player: Player, dealer: Dealer, deck: Deck):
+        self._player = player
+        self._dealer = dealer
+        self._deck = deck
 
-            if self.player.balance == 0:
-                print("GAMBLING IS BAD")
-                break
+    def reset_deck(self) -> None:
+        self._deck.reset()
 
-            choice = input("DO YOU WANT TO PLAY AGAIN [Y/N]: ")
-            if choice == "N":
-                break
-            self.reset_game()
-        print("THANK YOU FOR PLAYING")
+    def deal_cards(self) -> None:
+        p1 = self._deck.deal()
+        p2 = self._deck.deal()
 
-    def reset_game(self):
-        self.deck.reset()
-        self.player.hand.clear()
-        self.dealer.hand.clear()
+        self._player.add_card(p1)
+        self._player.add_card(p2)
 
-    def play_round(self):
-        bet = self.player.get_bet()
+        d1 = self._deck.deal()
 
-        self.player.hand.add_card(self.deck.deal())
-        self.dealer.hand.add_card(self.deck.deal())
-        self.player.hand.add_card(self.deck.deal())
+        self._dealer.add_card(d1)
 
-        if self.player.hand.is_blackjack():
-            self.render_state()
-            self.player.balance += int(2.5*bet)
-            print("BLACKJACK!!!")
-            return
-
-        self.render_state()
-
-        while self.player.hand.value <= 20:
-            action = self.player.choose_action()
-            time.sleep(1)
-            if action == "hit":
-                self.player.hand.add_card(self.deck.deal())
-                self.render_state()
-                if self.player.hand.value > 21:
-                    print(f"BUST!!! YOU LOSE {bet} BUCKS")
-                    return
-                elif self.player.hand.value == 21:
-                    self.player.balance += 2*bet
-                    print("YOU WIN!!!")
-                    return
-            else:
-                break
-
-        while self.dealer.choose_action() == "hit":
-            time.sleep(1)
-            self.dealer.hand.add_card(self.deck.deal())
-            self.render_state()
-
-            if self.dealer.hand.value > 21:
-                self.player.balance += 2*bet
-                print("DEALER BUSTS!!! YOU WIN!!!")
-                return
-
-        # showdown
-        if self.player.hand.value > self.dealer.hand.value:
-            self.player.balance += 2*bet
-            print("YOU WIN!!!")
-            return
-        elif self.player.hand.value == self.dealer.hand.value:
-            self.player.balance += bet
-            print("PUSH...")
-            return
+    def get_dealer_action(self) -> ActionType:
+        if self._dealer.should_stand():
+            return "stand"
         else:
-            print(f"YOU LOSE {bet} BUCKS!!")
-            return
-            
-            
-            
+            return "hit"
 
-    def render_state(self):
-        print("Dealer's cards: ")
-        self.dealer.hand.render()
-        print("Your cards:")
-        self.player.hand.render()
+    def dealer_hit(self) -> None:
+        card = self._deck.deal()
+        self._dealer.add_card(card)
+
+    def player_hit(self) -> None:
+        card = self._deck.deal()
+        self._player.add_card(card)
+
+    def player_is_finished(self, action: ActionType) -> bool:
+        if action == "stand":
+            return True
+        if self._player.is_bust():
+            return True
+        if self._player.is_blackjack():
+            return True
+        else:
+            return False
+
+    
+    def resolve_round(self) -> None:
+        if self._player.is_bust():
+            self._player.lose_bet()
+        elif self._dealer.is_bust():
+            self._player.collect_winnings()
+        elif self._player.is_blackjack() and not self._dealer.is_blackjack():
+            self._player.collect_winnings()
+        elif self._dealer.is_blackjack() and not self._player.is_blackjack():
+            self._player.lose_bet()
+        elif self._player.hand_value > self._dealer.hand_value:
+            self._player.collect_winnings()
+        elif self._player.hand_value < self._dealer.hand_value:
+            self._player.lose_bet()
+        else:
+            self._player.push()
 
 
-game = Game()
 
-game.play()
