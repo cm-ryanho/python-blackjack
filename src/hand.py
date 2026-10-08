@@ -5,6 +5,10 @@ class Hand:
         self._cards = []
 
     @property
+    def cards(self) -> tuple[BlackjackCard, ...]:
+        return tuple(self._cards)
+
+    @property
     def value(self):
         total = 0
         aces = 0

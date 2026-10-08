@@ -13,6 +13,9 @@ class BlackjackGame:
     def reset_deck(self) -> None:
         self._deck.reset()
 
+    def player_deposit(self, value) -> None:
+        self._player.deposit(value)
+
     def deal_cards(self) -> None:
         p1 = self._deck.deal()
         p2 = self._deck.deal()
@@ -38,6 +41,13 @@ class BlackjackGame:
         card = self._deck.deal()
         self._player.add_card(card)
 
+    def player_is_blackjack(self) -> bool:
+        return self._player.is_blackjack()
+
+    def player_is_bust(self) -> bool:
+        return self._player.is_bust()
+
+
     def player_is_finished(self, action: ActionType) -> bool:
         if action == "stand":
             return True
@@ -45,8 +55,16 @@ class BlackjackGame:
             return True
         if self._player.is_blackjack():
             return True
+        if self._player.hand_value == 21:
+            return True
         else:
             return False
+
+    def render_player_hand(self):
+        return self._player.render_hand()
+
+    def render_dealer_hand(self):
+        return self._dealer.render_hand()
 
     
     def resolve_round(self) -> None:
@@ -64,6 +82,21 @@ class BlackjackGame:
             self._player.lose_bet()
         else:
             self._player.push()
+
+    def get_player_balance(self) -> int:
+        return self._player.balance
+
+    def place_bet(self, amount: int) -> None:
+        self._player.place_bet(amount)
+
+    def dealer_is_bust(self) -> bool:
+        return self._dealer.is_bust()
+
+    def reset_round(self) -> None:
+        self._deck.reset()
+        self._player.clear_hand()
+        self._dealer.clear_hand()
+
 
 
 
