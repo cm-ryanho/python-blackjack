@@ -89,5 +89,14 @@ class BlackjackGame:
     def place_bet(self, amount: int) -> None:
     self._player.place_bet(amount)
 
+    def dealer_is_bust(self) -> bool:
+        return self._dealer.is_bust()
+
+    def reset_round(self) -> None:
+        self._deck.reset()
+        self._player.clear_hand()
+        self._dealer.clear_hand()
+
+
 
 
