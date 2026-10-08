@@ -47,7 +47,7 @@ def main():
         # continue playing?
         play_again = input("do you want to play another round? [y/n]: ").strip().lower()
         if not play_again == "y":
-            print(f"Thanks for playing, your remaining balance: {self.player.balance}")
+            print(f"Thanks for playing, your remaining balance: {game.get_player_balance}")
             break
     
 def get_bet(balance: int) -> int:
